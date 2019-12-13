@@ -9,10 +9,6 @@ textarea {
 }
 
 // general classes
-.hidden {
-	display: none;
-}
-
 .readonly {
 	background: #e9ecef;
 	opacity: 0.5;
@@ -52,6 +48,7 @@ textarea {
 		border-color: #28a745;
 		pointer-events: none !important;
 		color: white;
+		opacity: 1;
 	}
 
 	&#langAll {

@@ -25,9 +25,10 @@ function setObjectName() {
 	const value = `${jsonObjectName.value}`;
 	const name = value.replace(/ /g, '_');
 	const btn = document.getElementById('completeStep1');
+	console.log(value);
 
 	value == '' ? btn.classList.remove('activated') : btn.classList.add('activated');
-	jsonOutputElem.innerHTML = `"${name}" : {\n`;
+	jsonOutputElem.value = `"${name}" : {\n`;
 }
 
 // complete step
@@ -39,16 +40,12 @@ function completeStep1() {
 
 // prepare textarea text to be translatable
 function prepareInputText() {
-	const langBtns = document.querySelectorAll('.langBtn');
+	const langAllBtn = document.getElementById('langAll');
 
 	if (jsonObjectInput.value !== '') {
-		langBtns.forEach((btn) => {
-			btn.classList.add('activated');
-		});
+		langAllBtn.classList.add('activated');
 	} else {
-		langBtns.forEach((btn) => {
-			btn.classList.remove('activated');
-		});
+		langAllBtn.classList.remove('activated');
 	}
 
 	jsonObjectInputElem.innerText = `${jsonObjectInput.value}`;
@@ -89,7 +86,7 @@ function translateInput(lang, btnId) {
 // update JSON output
 function jsonOutput(attr, output) {
 	let attrVal = attr;
-	let outputVal = output;
+	const outputVal = output;
 	var event = new Event('change');
 
 	// convert attr to format
@@ -135,18 +132,15 @@ function reset() {
 	// counter
 	btnCounter = -1;
 
-	// step classes
-
+	// step / readonly classes
 	step1Elem.classList.remove('readonly');
 
-	// hidden classes
-	//readonly classe
-	//input values
+	// input values
 	jsonObjectName.value = '';
 	jsonObjectInput.value = '';
 	jsonOutputElem.value = '';
 
-	//activated classes
+	// activated classes
 	const resetBtn = document.getElementById('reset');
 	resetBtn.classList.remove('activated');
 
@@ -156,9 +150,13 @@ function reset() {
 	const translateBtn = document.getElementById('langAll');
 	translateBtn.classList.remove('activated');
 
-	const langBtns = document.querySelectorAll('.langBtn');
+	const langAllBtn = document.getElementById('langAll');
+	langAllBtn.classList.remove('activated');
 
-	langBtns.forEach((btn) => {
-		btn.classList.remove('btn-status');
+	const statusBtnsContainerElem = document.querySelector('.status-btns');
+	const statusBtns = statusBtnsContainerElem.querySelectorAll('.btn');
+
+	statusBtns.forEach((btn) => {
+		btn.classList.remove('btn-done');
 	});
 }

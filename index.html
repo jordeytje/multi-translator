@@ -8,39 +8,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<p style="position: absolute;">
-    Horses are grazing animals, adapted to eating small amounts of the same kind of food throughout the day. In the wild, the horse adapted to eating prairie grasses and travelling significant distances each day in order to obtain adequate nutrition. Domesticated horses can become anxious or stressed if there are long periods of time between meals.
-</p>
-<div class="container mt-5 pt-5" style="display: none;">
-    <div class="row">
-        <div class="col-6">
-            <div class="form-group card p-3">
-                <p class="mb-1">Orginiele text</p>
-                <textarea name="originalText" id="originalText" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-
-            <div class="form-group">
-                <div class="btn btn-block btn-primary">Convert</div>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="object-name mb-4 card p-3">
-                <p class="mb-1">Json object naam</p>
-                <input type="text" name="jsonObjectName" id="jsonObjectName" class="form-control">
-            </div>
-
-            <div class="language card p-3">
-                <p>Json object naam</p>
-            </div>
-
-            <div class="result mt-4 card p-3">
-                <p class="mb-1">Json Outpu et</p>
-                <textarea name="jsonOutput" id="jsonOutput" cols="30" rows="10" class="form-control" onchange="controlBtns();"></textarea>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container mt-5 pt-5">
     <div class="row">
@@ -89,12 +56,12 @@
                                 <div class="btn btn-primary langBtn skiptranslate" id="langAll" onclick="translateInput('Engels', 'langAll');">Translate Multi Language</div>
                             </div>
                             <div class="col-12 d-flex justify-content-between flex-wrap status-btns readonly">
-                                <div class="btn langBtn skiptranslate mt-3" id="langEn" onclick="translateInput('Engels', 'langEn');">Engels</div>
-                                <div class="btn langBtn skiptranslate mt-3" id="langIt" onclick="translateInput('Iers', 'langIt');">Iers</div>
-                                <div class="btn langBtn skiptranslate mt-3" id="langDe" onclick="translateInput('Duits', 'langDe');">Duits</div>
-                                <div class="btn langBtn skiptranslate mt-3" id="langFr" onclick="translateInput('Frans', 'langFr');">Frans</div>
-                                <div class="btn langBtn skiptranslate mt-3" id="langEs" onclick="translateInput('Spaans', 'langEs');">Spaans</div>
-                                <div class="btn langBtn skiptranslate mt-3" id="langCh" onclick="translateInput('Chinees (traditioneel)', 'langCh');">Chinees (traditioneel)</div>
+                                <div class="btn skiptranslate mt-3" id="langEn" onclick="translateInput('Engels', 'langEn');">Engels</div>
+                                <div class="btn skiptranslate mt-3" id="langIt" onclick="translateInput('Iers', 'langIt');">Iers</div>
+                                <div class="btn skiptranslate mt-3" id="langDe" onclick="translateInput('Duits', 'langDe');">Duits</div>
+                                <div class="btn skiptranslate mt-3" id="langFr" onclick="translateInput('Frans', 'langFr');">Frans</div>
+                                <div class="btn skiptranslate mt-3" id="langEs" onclick="translateInput('Spaans', 'langEs');">Spaans</div>
+                                <div class="btn skiptranslate mt-3" id="langCh" onclick="translateInput('Chinees (traditioneel)', 'langCh');">Chinees (traditioneel)</div>
                             </div>
                         </div>
                     </div>
@@ -122,10 +89,10 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({pageLanguage: 'nl'}, 'google_translate_element');
-    }
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'nl'}, 'google_translate_element');
+        }
     </script>
     
     <script type="text/javascript" src="assets/js/google.js"></script>
