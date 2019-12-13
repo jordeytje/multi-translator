@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
+<p style="position: absolute;">
+    Horses are grazing animals, adapted to eating small amounts of the same kind of food throughout the day. In the wild, the horse adapted to eating prairie grasses and travelling significant distances each day in order to obtain adequate nutrition. Domesticated horses can become anxious or stressed if there are long periods of time between meals.
+</p>
 <div class="container mt-5 pt-5" style="display: none;">
     <div class="row">
         <div class="col-6">
@@ -33,8 +35,8 @@
             </div>
 
             <div class="result mt-4 card p-3">
-                <p class="mb-1">Json Output</p>
-                <textarea name="jsonOutput" id="jsonOutput" cols="30" rows="10" class="form-control"></textarea>
+                <p class="mb-1">Json Outpu et</p>
+                <textarea name="jsonOutput" id="jsonOutput" cols="30" rows="10" class="form-control" onchange="controlBtns();"></textarea>
             </div>
         </div>
     </div>
@@ -43,7 +45,7 @@
 <div class="container mt-5 pt-5">
     <div class="row">
         <!-- left -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
 
             <!-- step 1 -->
             <div class="card step p-3" id="step1">
@@ -68,7 +70,7 @@
             <!-- step 2 -->
             <div class="card step p-3 mt-5 readonly" id="step2">
                 <p class="skiptranslate"><b>Step 2</b></p>
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <p class="skiptranslate">Original text</p>
                     <textarea name="text-input" id="text-input" cols="30" rows="4" class="form-control" oninput="prepareInputText();"></textarea>
 
@@ -79,16 +81,22 @@
             <!-- step 3 -->
             <div class="card step p-3 mt-5 readonly" id="step3">
                 <p class="skiptranslate"><b>Step 3</b></p>
-                <div class="form-group">
+                <div class="form-group mb-0">
                     <p class="skiptranslate">Languages</p>
                     <div class="lang-container">
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langEn" onclick="translateInput('Engels');">Engels</div>
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langIt" onclick="translateInput('Iers');">Iers</div>
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langDe" onclick="translateInput('Duits');">Duits</div>
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langFr" onclick="translateInput('Frans');">Frans</div>
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langEs" onclick="translateInput('Spaans');">Spaans</div>
-                        <div class="btn btn-primary langBtn skiptranslate hidden" id="langCh" onclick="translateInput('Chinees (traditioneel)');">Chinees (traditioneel)</div>
-                        <div class="btn btn-primary langBtn skiptranslate" id="langAll" onclick="translateAllInput();">Translate Multi Language</div>
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <div class="btn btn-primary langBtn skiptranslate" id="langAll" onclick="translateInput('Engels', 'langAll');">Translate Multi Language</div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-between flex-wrap status-btns readonly">
+                                <div class="btn langBtn skiptranslate mt-3" id="langEn" onclick="translateInput('Engels', 'langEn');">Engels</div>
+                                <div class="btn langBtn skiptranslate mt-3" id="langIt" onclick="translateInput('Iers', 'langIt');">Iers</div>
+                                <div class="btn langBtn skiptranslate mt-3" id="langDe" onclick="translateInput('Duits', 'langDe');">Duits</div>
+                                <div class="btn langBtn skiptranslate mt-3" id="langFr" onclick="translateInput('Frans', 'langFr');">Frans</div>
+                                <div class="btn langBtn skiptranslate mt-3" id="langEs" onclick="translateInput('Spaans', 'langEs');">Spaans</div>
+                                <div class="btn langBtn skiptranslate mt-3" id="langCh" onclick="translateInput('Chinees (traditioneel)', 'langCh');">Chinees (traditioneel)</div>
+                            </div>
+                        </div>
                     </div>
                     <div id="google_translate_element" class="readonly mt-3"></div>
                 </div>
@@ -96,12 +104,18 @@
         </div>
 
         <!-- right -->
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div class="card p-3">
                 <div class="form-group">
                     <p class="skiptranslate">JSON output</p>
-                    <textarea readonly name="json-output" id="json-output" cols="30" rows="30" class="form-control"></textarea>
+                    <textarea readonly name="json-output" id="json-output" cols="30" rows="30" class="form-control" onchange="controlBtns();"></textarea>
                     <div class="btn btn-success btn-copy activated skiptranslate" onclick="copyJson();">Copy</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-6 mt-4 mb-4">
+                    <div class="btn btn-primary btn-block skiptranslate" id="reset" onclick="reset();">New Translation</div>
                 </div>
             </div>
         </div>

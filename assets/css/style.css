@@ -1,7 +1,44 @@
-body.multi-language-text-format #google_translate_element .goog-te-gadget select option {
+p {
+  margin: 0 0 5px 0; }
+
+textarea {
+  min-height: 100px;
+  max-height: 500px; }
+
+.hidden {
   display: none; }
-  body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=en], body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=ga], body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=de], body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=fr], body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=es], body.multi-language-text-format #google_translate_element .goog-te-gadget select option[value=zh-CN] {
-    display: block !important; }
+
+.readonly {
+  background: #e9ecef;
+  opacity: 0.5; }
+  .readonly input,
+  .readonly textarea,
+  .readonly .btn,
+  .readonly select,
+  .readonly a,
+  .readonly .btn.activated {
+    pointer-events: none; }
+  .readonly:hover {
+    cursor: not-allowed; }
+
+.btn {
+  pointer-events: none;
+  opacity: 0.5; }
+  .btn.activated {
+    pointer-events: all;
+    opacity: 1; }
+  .btn.btn-copy {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    border-radius: 0 5px 0 0; }
+  .btn.btn-done {
+    background: #28a745;
+    border-color: #28a745;
+    pointer-events: none !important;
+    color: white; }
+  .btn#langAll {
+    display: block; }
 
 #google_translate_element .goog-te-gadget select {
   display: block;
@@ -18,48 +55,16 @@ body.multi-language-text-format #google_translate_element .goog-te-gadget select
   border-radius: .25rem;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out; }
 
-p {
-  margin: 0 0 5px 0; }
-
 #multilanguageOn {
   width: 20px;
   height: 20px;
   margin-right: 15px; }
-
-textarea {
-  min-height: 100px;
-  max-height: 665px; }
-
-.readonly {
-  background: #e9ecef;
-  opacity: 0.5; }
-  .readonly input,
-  .readonly textarea,
-  .readonly .btn,
-  .readonly select,
-  .readonly a,
-  .readonly .btn.activated {
-    pointer-events: none; }
-  .readonly:hover {
-    cursor: not-allowed; }
-
-.hidden {
-  display: none; }
 
 #text-input-elem {
   height: 1px;
   opacity: 0;
   pointer-events: none; }
 
-.btn {
-  pointer-events: none;
-  opacity: 0.5; }
-  .btn.activated {
-    pointer-events: all;
-    opacity: 1; }
-
-.btn-copy {
-  position: absolute;
-  top: 45px;
-  right: 15px;
-  border-radius: 0 5px 0 0; }
+.lang-container,
+.status-btns {
+  background: transparent; }

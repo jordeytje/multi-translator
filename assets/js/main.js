@@ -8,14 +8,17 @@ const jsonObjectInputElem = document.getElementById('text-input-elem');
 
 const googleTranslater = document.querySelector('#google_translate_element');
 
-var jsonDataArray = [];
+const langContainerElem = document.querySelector('.lang-container');
 
-// setup MultiLanguageText Format
-const multiLanguageTextFormat = document.getElementById('multilanguageOn');
-multiLanguageTextFormat.checked
-	? (bodyElem.classList.add('multi-language-text-format'),
-		(jsonOutputElem.innerHTML = `"${jsonObjectName.value}" : {\n    "": ""\n}\n`))
-	: '';
+const step1Elem = document.getElementById('step1');
+const step2Elem = document.getElementById('step2');
+const step3Elem = document.getElementById('step3');
+
+const resetBtn = document.getElementById('reset');
+
+var btnCounter = -1;
+
+jsonOutputElem.placeholder = `"${jsonObjectName.value}" : {\n    "": ""\n}\n`;
 
 // set object name
 function setObjectName() {
@@ -24,17 +27,14 @@ function setObjectName() {
 	const btn = document.getElementById('completeStep1');
 
 	value == '' ? btn.classList.remove('activated') : btn.classList.add('activated');
-	jsonOutputElem.innerHTML = `"${name}" : {\n    "": ""\n}\n`;
+	jsonOutputElem.innerHTML = `"${name}" : {\n`;
 }
 
 // complete step
 function completeStep1() {
-	const steps = document.querySelectorAll('.step');
-	steps.forEach((step) => {
-		step.classList.contains('readonly') ? step.classList.remove('readonly') : null;
-	});
-
-	steps[0].classList.add('readonly');
+	step1Elem.classList.add('readonly');
+	step2Elem.classList.remove('readonly');
+	step3Elem.classList.remove('readonly');
 }
 
 // prepare textarea text to be translatable
@@ -55,11 +55,23 @@ function prepareInputText() {
 }
 
 // translate input
-function translateInput(lang) {
-	const options = googleTranslater.querySelectorAll('select option');
+function translateInput(lang, btnId) {
+	if (btnId == 'langAll') {
+		step2Elem.classList.add('readonly');
+		step3Elem.classList.add('readonly');
 
+		incrementCounter();
+		controlBtns();
+		return false;
+	}
+
+	const options = googleTranslater.querySelectorAll('select option');
+	const btn = document.getElementById(btnId);
+
+	incrementCounter();
+
+	// get requested language
 	options.forEach((option) => {
-		// force onchange event
 		var event = new Event('change');
 
 		if (option.innerHTML == lang) {
@@ -68,94 +80,85 @@ function translateInput(lang) {
 
 			setTimeout(function() {
 				jsonOutput(option.value, jsonObjectInputElem.children[0].innerText);
+				btn.classList.add('btn-done');
 			}, 750);
 		}
 	});
-}
-
-// translate all
-function translateAllInput() {
-	const langEn = document.getElementById('langEn');
-	const langIt = document.getElementById('langIt');
-	const langDe = document.getElementById('langDe');
-	const langFr = document.getElementById('langFr');
-	const langEs = document.getElementById('langEs');
-	const langCh = document.getElementById('langCh');
-
-	langEn.click();
-
-	setTimeout(function() {
-		langIt.click();
-	}, 750);
-
-	setTimeout(function() {
-		langDe.click();
-	}, 1410);
-
-	setTimeout(function() {
-		langFr.click();
-	}, 2120);
-
-	setTimeout(function() {
-		langEs.click();
-	}, 2830);
-
-	setTimeout(function() {
-		langCh.click();
-	}, 3540);
-
-	setTimeout(function() {
-		convertAll();
-	}, 4250);
 }
 
 // update JSON output
 function jsonOutput(attr, output) {
 	let attrVal = attr;
 	let outputVal = output;
+	var event = new Event('change');
 
 	// convert attr to format
 	attrVal == 'ga' ? (attrVal = 'it') : null;
 	attrVal == 'zh-TW' ? (attrVal = 'ch') : null;
 
-	let dataRow = {
-		attrVal,
-		outputVal
-	};
+	if (attrVal == 'ch') {
+		jsonOutputElem.value += `    "${attrVal}": "${outputVal}"\n}`;
+	} else {
+		jsonOutputElem.value += `    "${attrVal}": "${outputVal}", \n`;
+	}
 
-	jsonDataArray.push(dataRow);
+	jsonOutputElem.dispatchEvent(event);
 }
 
 // copy JSON content
 function copyJson() {
-	const elem = document.getElementById('json-output');
-
-	elem.select();
+	jsonOutputElem.select();
 	document.execCommand('copy');
 }
 
-function convertAll() {
-	console.log(jsonDataArray);
+// run all languages
+function controlBtns() {
+	if (btnCounter == 6) {
+		resetBtn.classList.add('activated');
 
-	// const langBtns = document.querySelectorAll('.langBtn');
-
-	jsonOutputElem.innerHTML = `"${jsonObjectName.value}" : {\n`;
-
-	for (let i = 0; i < 6; i++) {
-		let dataRow = `    "${jsonDataArray[i].attrVal}": "${jsonDataArray[i].outputVal}"`;
-
-		if (i == 5) {
-			jsonOutputElem.value += dataRow;
-			jsonOutputElem.value += '\n}';
-		} else {
-			jsonOutputElem.value += dataRow;
-			jsonOutputElem.value += ',\n';
-		}
+		return false;
 	}
+	const btnList = [ 'langEn', 'langIt', 'langDe', 'langFr', 'langEs', 'langCh' ];
+	let btn = document.getElementById(`${btnList[btnCounter]}`);
+
+	btn.click();
 }
 
-function finalizeJson() {
-	let str = `${jsonOutputElem.value}`;
-	str.slice(0, -1);
-	console.log(str);
+// language btn counter
+function incrementCounter() {
+	btnCounter++;
+}
+
+function reset() {
+	console.log('reset');
+
+	// counter
+	btnCounter = -1;
+
+	// step classes
+
+	step1Elem.classList.remove('readonly');
+
+	// hidden classes
+	//readonly classe
+	//input values
+	jsonObjectName.value = '';
+	jsonObjectInput.value = '';
+	jsonOutputElem.value = '';
+
+	//activated classes
+	const resetBtn = document.getElementById('reset');
+	resetBtn.classList.remove('activated');
+
+	const completeStep1Btn = document.getElementById('completeStep1');
+	completeStep1Btn.classList.remove('activated');
+
+	const translateBtn = document.getElementById('langAll');
+	translateBtn.classList.remove('activated');
+
+	const langBtns = document.querySelectorAll('.langBtn');
+
+	langBtns.forEach((btn) => {
+		btn.classList.remove('btn-status');
+	});
 }

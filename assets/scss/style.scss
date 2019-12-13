@@ -1,49 +1,16 @@
-body.multi-language-text-format {
-	#google_translate_element .goog-te-gadget select {
-		option {
-			display: none;
-
-			&[value=en],
-			&[value=ga],
-			&[value=de],
-			&[value=fr],
-			&[value=es],
-			&[value=zh-CN] {
-				display: block !important;
-			}
-		}
-	}
-}
-
-#google_translate_element .goog-te-gadget select {
-	display: block;
-	width: 100%;
-	height: calc(1.5em + .75rem + 2px);
-	padding: .375rem .75rem;
-	font-size: 1rem;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #495057;
-	background-color: #fff;
-	background-clip: padding-box;
-	border: 1px solid #ced4da;
-	border-radius: .25rem;
-	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-}
-
+// general elements
 p {
 	margin: 0 0 5px 0;
 }
 
-#multilanguageOn {
-	width: 20px;
-	height: 20px;
-	margin-right: 15px;
-}
-
 textarea {
 	min-height: 100px;
-	max-height: 665px;
+	max-height: 500px;
+}
+
+// general classes
+.hidden {
+	display: none;
 }
 
 .readonly {
@@ -64,16 +31,6 @@ textarea {
 	}
 }
 
-.hidden {
-	display: none;
-}
-
-#text-input-elem {
-	height: 1px;
-	opacity: 0;
-	pointer-events: none;
-}
-
 .btn {
 	pointer-events: none;
 	opacity: 0.5;
@@ -82,11 +39,56 @@ textarea {
 		pointer-events: all;
 		opacity: 1;
 	}
+
+	&.btn-copy {
+		position: absolute;
+		top: 45px;
+		right: 15px;
+		border-radius: 0 5px 0 0;
+	}
+
+	&.btn-done {
+		background: #28a745;
+		border-color: #28a745;
+		pointer-events: none !important;
+		color: white;
+	}
+
+	&#langAll {
+		display: block;
+	}
 }
 
-.btn-copy {
-	position: absolute;
-	top: 45px;
-	right: 15px;
-	border-radius: 0 5px 0 0;
+// custom
+#google_translate_element .goog-te-gadget select {
+	display: block;
+	width: 100%;
+	height: calc(1.5em + .75rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+#multilanguageOn {
+	width: 20px;
+	height: 20px;
+	margin-right: 15px;
+}
+
+#text-input-elem {
+	height: 1px;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.lang-container,
+.status-btns {
+	background: transparent;
 }
