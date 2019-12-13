@@ -28,7 +28,7 @@ function setObjectName() {
 	console.log(value);
 
 	value == '' ? btn.classList.remove('activated') : btn.classList.add('activated');
-	jsonOutputElem.value = `"${name}" : {\n`;
+	jsonOutputElem.value = `"${name}": {\n`;
 }
 
 // complete step
