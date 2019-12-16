@@ -84,8 +84,9 @@ function translateInput(lang, btnId) {
 }
 
 // update JSON output
-function jsonOutput(attr, output) {
+function jsonOutput(attr, rawOutput) {
 	let attrVal = attr;
+	let output = rawOutput.replace(/"/g, '\\"');
 	const outputVal = output;
 	var event = new Event('change');
 
